@@ -1,0 +1,34 @@
+<h1>Department Details</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @department.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @department.description %>
+</p>
+
+<p>
+  <strong>Employee Count:</strong>
+  <%= @department.employee_count %>
+</p>
+
+<h2>Employees</h2>
+
+<% if @department.employees.any? %>
+
+  <ul>
+    <% @department.employees.each do |employee| %>
+      <li>
+        <%= employee.name %>
+      </li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+  <p>No employees assigned.</p>
+
+<% end %>

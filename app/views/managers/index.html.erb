@@ -1,0 +1,37 @@
+<h1>Managers</h1>
+
+<%= link_to "Add Manager", new_manager_path %>
+
+<br><br>
+
+<p>
+  Total Managers:
+  <%= @managers.count %>
+</p>
+
+<table border="1">
+  <tr>
+    <th>Employee Count</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Actions</th>
+  </tr>
+
+  <% @managers.each do |manager| %>
+    <tr>
+      <td><%= manager.employee_count %></td>
+      <td><%= manager.name %></td>
+      <td><%= manager.email %></td>
+      <td>
+        <%= link_to "Show", manager %> |
+        <%= link_to "Edit", edit_manager_path(manager) %> |
+        <%= link_to "Delete",
+                    manager,
+                    data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    } %>
+      </td>
+    </tr>
+  <% end %>
+</table>

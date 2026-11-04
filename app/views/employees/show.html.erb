@@ -1,0 +1,55 @@
+<h1>Employee Details</h1>
+
+<p>
+  <strong>Employee Code:</strong>
+  <%= @employee.employee_code %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @employee.status %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @employee.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @employee.email %>
+</p>
+
+<p>
+  <strong>Joining Date:</strong>
+  <%= @employee.joining_date %>
+</p>
+
+<p>
+  <strong>Designation:</strong>
+  <%= @employee.designation %>
+</p>
+
+<p>
+  <strong>Salary:</strong>
+  <%= @employee.salary %>
+</p>
+
+<p>
+  <strong>Manager:</strong>
+  <%= @employee.manager.name %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @employee.department&.name || "Not Assigned" %>
+</p>
+
+<p>
+  <strong>Annual Salary:</strong>
+  <%= @employee.annual_salary %>
+</p>
+
+<%= link_to "Edit", edit_employee_path(@employee) %>
+
+<%= link_to "Back", employees_path %>

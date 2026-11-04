@@ -1,0 +1,99 @@
+<% if @employee.errors.any? %>
+  <div style="color: red;">
+    <h3>
+      <%= pluralize(@employee.errors.count, "error") %>
+      prevented this employee from being saved:
+    </h3>
+
+    <ul>
+      <% @employee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @employee do |f| %>
+
+  <div>
+    <%= f.label :employee_code %><br>
+    <%= f.text_field :employee_code %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= f.label :status %><br>
+    <%= f.select :status, ["Active", "Resign", "Inactive"], prompt: "Select Status" %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= f.label :email %><br>
+    <%= f.email_field :email %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= f.label :joining_date %><br>
+    <%= f.date_field :joining_date %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= f.label :designation %><br>
+    <%= f.text_field :designation %>
+  </div>
+
+  <br>
+
+  <div>
+    <%= f.label :salary %><br>
+    <%= f.number_field :salary %>
+  </div>
+
+  <br>
+
+  <div>
+  <%= f.label :manager %><br>
+
+  <%= f.collection_select(
+    :manager_id,
+    @managers,
+    :id,
+    :name,
+    { prompt: "Select Manager" }
+  ) %>
+</div>
+
+<br>
+
+<div>
+  <%= f.label :department %><br>
+
+  <%= f.collection_select(
+    :department_id,
+    @departments,
+    :id,
+    :name,
+    { prompt: "Select Department" }
+  ) %>
+</div>
+
+  <br>
+
+  <div>
+    <%= f.submit %>
+  </div>
+
+<% end %>

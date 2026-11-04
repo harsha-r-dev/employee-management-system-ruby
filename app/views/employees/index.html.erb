@@ -1,0 +1,128 @@
+<h1>Employees</h1>
+
+<%= link_to "Add Employee", new_employee_path %>
+
+<br><br>
+
+<%= form_with url: search_employees_path,
+              method: :get do |f| %>
+
+  <%= f.text_field :keyword,
+                    placeholder: "Search by ID, Name, Email, Status, Manager or Department" %>
+
+  <%= f.submit "Search" %>
+
+  <%= link_to "Clear", employees_path %>
+
+<% end %>
+
+<%= form_with url: filter_employees_path,
+              method: :get do %>
+
+  <%= select_tag :status,
+      options_for_select(
+        ["Active", "Inactive", "Resign"]
+      ),
+      prompt: "Filter By Status" %>
+
+  <%= submit_tag "Filter" %>
+
+<% end %>
+
+<br>
+
+<%= form_with url: department_filter_employees_path,
+              method: :get do %>
+
+  <%= select_tag :department_id,
+      options_from_collection_for_select(
+        @departments,
+        :id,
+        :name
+      ),
+      prompt: "Filter By Department" %>
+
+  <%= submit_tag "Filter Department" %>
+
+<% end %>
+
+<br>
+
+<%= form_with url: manager_filter_employees_path,
+              method: :get do %>
+
+  <%= select_tag :manager_id,
+      options_from_collection_for_select(
+        @managers,
+        :id,
+        :name
+      ),
+      prompt: "Filter By Manager" %>
+
+  <%= submit_tag "Filter Manager" %>
+
+<% end %>
+
+<br>
+
+<%= form_with url: joining_date_filter_employees_path,
+              method: :get do %>
+
+  <%= label_tag :start_date, "From" %>
+
+  <%= date_field_tag :start_date %>
+
+  <%= label_tag :end_date, "To" %>
+
+  <%= date_field_tag :end_date %>
+
+  <%= submit_tag "Filter By Joining Date" %>
+
+<% end %>
+
+<br>
+
+<p>
+  Total Employees:
+  <%= @employees.count %>
+</p>
+
+<table border="1">
+  <tr>
+    <th>Employee Code</th>
+    <th>Status</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Joining Date</th>
+    <th>Designation</th>
+    <th>Salary</th>
+    <th>Manager</th>
+    <th>Department</th>
+    <th>Actions</th>
+  </tr>
+
+  <% @employees.each do |employee| %>
+    <tr>
+      <td><%= employee.employee_code %></td>
+      <td><%= employee.status %></td>
+      <td><%= employee.name %></td>
+      <td><%= employee.email %></td>
+      <td><%= employee.joining_date %></td>
+      <td><%= employee.designation %></td>
+      <td><%= employee.salary %></td>
+      <td><%= employee.manager.name %></td>
+      <td><%= employee.department&.name || "Not Assigned" %></td>
+
+      <td>
+        <%= link_to "Show", employee %> |
+        <%= link_to "Edit", edit_employee_path(employee) %> |
+        <%= link_to "Delete",
+                    employee,
+                    data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    } %>
+      </td>
+    </tr>
+  <% end %>
+</table>

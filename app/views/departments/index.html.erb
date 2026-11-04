@@ -1,0 +1,38 @@
+<h1>Departments</h1>
+
+<%= link_to "Add Department", new_department_path %>
+
+<br><br>
+
+<p>
+  Total Departments:
+  <%= @departments.count %>
+</p>
+
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Employee Count</th>
+    <th>Actions</th>
+  </tr>
+
+  <% @departments.each do |department| %>
+    <tr>
+      <td><%= department.name %></td>
+      <td><%= department.description %></td>
+      <td><%= department.employee_count %></td>
+      
+      <td>
+        <%= link_to "Show", department %> |
+        <%= link_to "Edit", edit_department_path(department) %> |
+        <%= link_to "Delete",
+                    department,
+                    data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    } %>
+      </td>
+    </tr>
+  <% end %>
+</table>

@@ -376,25 +376,25 @@ bundle install
 Create database:
 
 ```bash
-rails db:create
+ruby bin/rails db:create
 ```
 
 Run migrations:
 
 ```bash
-rails db:migrate
+ruby bin/rails db:migrate
 ```
 
 Load sample data:
 
 ```bash
-rails db:seed
+ruby bin/rails db:seed
 ```
 
 Start the Rails server:
 
 ```bash
-rails server
+ruby bin/rails server
 ```
 
 Open in browser:
